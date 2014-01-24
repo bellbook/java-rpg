@@ -1,0 +1,51 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.6
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.python:jython:2.5.3',
+            'org.apache.commons:commons-digester3:3.2',
+            'commons-beanutils:commons-beanutils:1.8.3',
+            'commons-logging:commons-logging:1.1.3',
+            'log4j:log4j:1.2.16'
+
+    compile files('lib/log4j-1.2.13-ext.jar')
+}
+
+jar {
+    archiveName = "${baseName}.${extension}"
+
+    def libPath = configurations.compile.collect { 'lib/' + it.getName() }.join(' ')
+    manifest {
+        attributes 'Implementation-Version': version
+        attributes 'Main-Class': 'Main'
+        attributes 'Class-Path': 'resources/ script/ ' + libPath
+    }
+
+    sourceSets.main.resources.exclude '*'
+}
+
+task release(dependsOn: assemble) << {
+    copy { // oss
+        from configurations.compile
+        into "$distsDir/lib"
+    }
+    copy { // resource
+        from sourceSets.main.resources.srcDirs
+        into "$distsDir/resources"
+    }
+    copy { // python script
+        from 'src/main/python'
+        into "$distsDir/script"
+    }
+    copy { // jar
+        from libsDir
+        into distsDir
+    }
+}
