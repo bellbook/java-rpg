@@ -60,31 +60,24 @@ public class Controller implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         final int keyCode = e.getKeyCode();
-
         if (keyCode == keyUp) {
             pressingKey.add(Key.UP);
-        }
-        else if (keyCode == keyDown) {
+        } else if (keyCode == keyDown) {
             pressingKey.add(Key.DOWN);
-        }
-        else if (keyCode == keyLeft) {
+        } else if (keyCode == keyLeft) {
             pressingKey.add(Key.LEFT);
-        }
-        else if (keyCode == keyRight) {
+        } else if (keyCode == keyRight) {
             pressingKey.add(Key.RIGHT);
-        }
-        else if (keyCode == keyOK) {
+        } else if (keyCode == keyOK) {
             pressingKey.add(Key.OK);
             if (typedKey == Key.NONE)
                 typedKey = Key.OK;
-        }
-        else if (keyCode == keyCancel) {
+        } else if (keyCode == keyCancel) {
             pressingKey.add(Key.CANCEL);
             if (typedKey == Key.NONE)
                 typedKey = Key.CANCEL;
+        } else {
         }
-        else
-            ;
     }
 
     @Override
@@ -94,22 +87,16 @@ public class Controller implements KeyListener {
         final int keyCode = e.getKeyCode();
         if (keyCode == keyUp)
             pressingKey.remove(Key.UP);
-
         else if (keyCode == keyDown)
             pressingKey.remove(Key.DOWN);
-
         else if (keyCode == keyLeft)
             pressingKey.remove(Key.LEFT);
-
         else if (keyCode == keyRight)
             pressingKey.remove(Key.RIGHT);
-
         else if (keyCode == keyOK)
             pressingKey.remove(Key.OK);
-
         else if (keyCode == keyCancel)
             pressingKey.remove(Key.CANCEL);
-
         else
             ;
     }

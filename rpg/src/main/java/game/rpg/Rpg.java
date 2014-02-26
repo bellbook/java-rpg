@@ -25,7 +25,6 @@ public class Rpg {
     private final GameFrame frame;
 
     private Rpg() {
-
         // validate
         try {
             ConfigConst.validate();

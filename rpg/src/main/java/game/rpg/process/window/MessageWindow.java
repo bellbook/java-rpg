@@ -119,7 +119,6 @@ public class MessageWindow extends SystemWindow {
 
         @Override
         public void run() {
-
             if (isDrawingMessage) {
                 position++;
                 while (hasNextChar(position) && !isEndOfPage(position)) {

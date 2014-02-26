@@ -86,48 +86,28 @@ public class MoveState implements GameState {
     }
 
     private void move(Player player, Map map) {
-
         if (controller.isPressing(Key.UP)
-                && controller.isPressing(Key.LEFT)) {
-
+                && controller.isPressing(Key.LEFT))
             player.move(map, Direction.UPPER_LEFT);
-
-        } else if (controller.isPressing(Key.UP)
-                && controller.isPressing(Key.RIGHT)) {
-
+        else if (controller.isPressing(Key.UP)
+                && controller.isPressing(Key.RIGHT))
             player.move(map, Direction.UPPER_RIGHT);
-
-        } else if (controller.isPressing(Key.DOWN)
-                && controller.isPressing(Key.LEFT)) {
-
+        else if (controller.isPressing(Key.DOWN)
+                && controller.isPressing(Key.LEFT))
             player.move(map, Direction.LOWER_LEFT);
-
-        } else if (controller.isPressing(Key.DOWN)
-                && controller.isPressing(Key.RIGHT)) {
-
+        else if (controller.isPressing(Key.DOWN)
+                && controller.isPressing(Key.RIGHT))
             player.move(map, Direction.LOWER_RIGHT);
-
-        } else if (controller.isPressing(Key.UP)) {
-
+        else if (controller.isPressing(Key.UP))
             player.move(map, Direction.UP);
-
-        } else if (controller.isPressing(Key.DOWN)) {
-
+        else if (controller.isPressing(Key.DOWN))
             player.move(map, Direction.DOWN);
-
-        } else if (controller.isPressing(Key.LEFT)) {
-
+        else if (controller.isPressing(Key.LEFT))
             player.move(map, Direction.LEFT);
-
-        } else if (controller.isPressing(Key.RIGHT)) {
-
+        else if (controller.isPressing(Key.RIGHT))
             player.move(map, Direction.RIGHT);
-
-        } else {
-
+        else
             player.idle();
-
-        }
     }
 
     private void drawDebugInfo(Graphics g) {

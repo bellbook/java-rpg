@@ -17,15 +17,12 @@ public class EventCommand {
     }
 
     public static void showChoice() {
-
     }
 
     public static void transfer(Map map, int x, int y) {
-
     }
 
     public static void makeSoundEffect() {
-
     }
 
     public static void setState(GameState state) {
