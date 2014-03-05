@@ -1,9 +1,5 @@
 package game.rpg.state;
 
-import java.awt.Graphics;
-import java.awt.image.ImageObserver;
-import java.util.Random;
-
 import game.core.GameState;
 import game.core.input.Controller;
 import game.core.input.Controller.Key;
@@ -12,6 +8,10 @@ import game.rpg.process.event.Characters;
 import game.rpg.process.event.Event;
 import game.rpg.process.event.Player;
 import game.rpg.process.map.Map;
+
+import java.awt.Graphics;
+import java.awt.image.ImageObserver;
+import java.util.Random;
 
 public class MoveState implements GameState {
 
@@ -22,7 +22,6 @@ public class MoveState implements GameState {
 
     private boolean debug;
 
-    private Controller controller;
     private Player player;
     private Map map;
 
@@ -34,15 +33,15 @@ public class MoveState implements GameState {
     }
 
     @Override
-    public void processInput() {
-        if (controller == null || player == null)
+    public void processInput(Controller c) {
+        if (c == null || player == null)
             return;
 
-        if (controller.isPressing()) {
-            if (controller.isTyped(Key.OK))
+        if (c.isPressing()) {
+            if (c.isTyped(Key.OK))
                 player.check(map);
             else
-                move(player, map);
+                move(c, player, map);
         } else {
             player.idle();
         }
@@ -85,26 +84,22 @@ public class MoveState implements GameState {
             drawDebugInfo(g);
     }
 
-    private void move(Player player, Map map) {
-        if (controller.isPressing(Key.UP)
-                && controller.isPressing(Key.LEFT))
+    private void move(Controller c, Player player, Map map) {
+        if (c.isPressing(Key.UP) && c.isPressing(Key.LEFT))
             player.move(map, Direction.UPPER_LEFT);
-        else if (controller.isPressing(Key.UP)
-                && controller.isPressing(Key.RIGHT))
+        else if (c.isPressing(Key.UP) && c.isPressing(Key.RIGHT))
             player.move(map, Direction.UPPER_RIGHT);
-        else if (controller.isPressing(Key.DOWN)
-                && controller.isPressing(Key.LEFT))
+        else if (c.isPressing(Key.DOWN) && c.isPressing(Key.LEFT))
             player.move(map, Direction.LOWER_LEFT);
-        else if (controller.isPressing(Key.DOWN)
-                && controller.isPressing(Key.RIGHT))
+        else if (c.isPressing(Key.DOWN) && c.isPressing(Key.RIGHT))
             player.move(map, Direction.LOWER_RIGHT);
-        else if (controller.isPressing(Key.UP))
+        else if (c.isPressing(Key.UP))
             player.move(map, Direction.UP);
-        else if (controller.isPressing(Key.DOWN))
+        else if (c.isPressing(Key.DOWN))
             player.move(map, Direction.DOWN);
-        else if (controller.isPressing(Key.LEFT))
+        else if (c.isPressing(Key.LEFT))
             player.move(map, Direction.LEFT);
-        else if (controller.isPressing(Key.RIGHT))
+        else if (c.isPressing(Key.RIGHT))
             player.move(map, Direction.RIGHT);
         else
             player.idle();
@@ -116,15 +111,6 @@ public class MoveState implements GameState {
             String info = " PLAYER (" + player.getX() + ", " + player.getY() + ")";
             g.drawString(info, 0, 16);
         }
-    }
-
-    public Controller getController() {
-        return controller;
-    }
-
-    public MoveState setController(Controller controller) {
-        this.controller = controller;
-        return this;
     }
 
     public Player getPlayer() {

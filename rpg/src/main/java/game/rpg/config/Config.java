@@ -14,7 +14,6 @@ import util.Loader;
 public class Config {
 
     public enum Key {
-
         // Key
         KEY_UP     ("38"),
         KEY_DOWN   ("40"),

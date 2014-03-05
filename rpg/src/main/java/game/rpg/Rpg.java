@@ -1,11 +1,5 @@
 package game.rpg;
 
-import java.io.FileNotFoundException;
-
-import org.apache.log4j.Logger;
-
-import util.Loader;
-import util.Python;
 import game.core.Game;
 import game.core.GameState;
 import game.core.input.Controller;
@@ -13,7 +7,13 @@ import game.core.output.GameFrame;
 import game.core.output.GameScreen;
 import game.rpg.config.ConfigConst;
 import game.rpg.state.MoveState;
-import game.rpg.state.TalkState;
+
+import java.io.FileNotFoundException;
+
+import org.apache.log4j.Logger;
+
+import util.Loader;
+import util.Python;
 
 public class Rpg {
 
@@ -41,7 +41,6 @@ public class Rpg {
             log.debug(SCRIPT_FILE_NAME, e);
             throw new RuntimeException(e);
         }
-
         try {
             Python.execfile(scriptFileName);
         } catch (Exception e) {
@@ -65,11 +64,7 @@ public class Rpg {
         // configure state
         // - move state
         MoveState state = MoveState.getInstance()
-                .setController(controller)
                 .setDebug(ConfigConst.DEBUG);
-        // - talk state
-        TalkState.getInstance()
-                .setController(controller);
 
         game = new Game(controller, screen)
                 .setState(state);

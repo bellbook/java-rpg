@@ -40,15 +40,11 @@ public class Game {
         return this;
     }
 
-    public Controller getController() {
-        return controller;
-    }
-
     private class GameLoop extends TimerTask {
 
         @Override
         public void run() {
-            state.processInput();
+            state.processInput(controller);
             state.update();
             screen.repaint();
         }

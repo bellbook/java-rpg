@@ -7,7 +7,6 @@ import java.util.EnumSet;
 public class Controller implements KeyListener {
 
     public enum Key {
-
         NONE, // not pressed
 
         UP,
@@ -17,10 +16,9 @@ public class Controller implements KeyListener {
 
         OK,
         CANCEL,
-
     }
 
-    private EnumSet<Key> pressingKey = EnumSet.noneOf(Key.class);
+    private final EnumSet<Key> pressingKey = EnumSet.noneOf(Key.class);
     private Key typedKey;
 
     private int keyUp     = 38; // ↑

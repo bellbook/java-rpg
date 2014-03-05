@@ -1,9 +1,5 @@
 package game.rpg.state;
 
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.image.ImageObserver;
-
 import game.core.GameState;
 import game.core.input.Controller;
 import game.core.input.Controller.Key;
@@ -11,11 +7,14 @@ import game.rpg.Rpg;
 import game.rpg.config.ConfigConst;
 import game.rpg.process.window.MessageWindow;
 
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.image.ImageObserver;
+
 public class TalkState implements GameState {
 
     private static final TalkState instance = new TalkState();
 
-    private Controller controller;
     private final MessageWindow messageWindow;
 
     private TalkState() {
@@ -28,11 +27,11 @@ public class TalkState implements GameState {
     }
 
     @Override
-    public void processInput() {
-        if (controller == null)
+    public void processInput(Controller c) {
+        if (c == null)
             return;
 
-        if (controller.isTyped(Key.OK)) {
+        if (c.isTyped(Key.OK)) {
             boolean hasNextPage = messageWindow.nextPage();
             if (!hasNextPage)
                 Rpg.getInstance().setState(MoveState.getInstance());
@@ -59,11 +58,6 @@ public class TalkState implements GameState {
 
     public void setMessageFont(Font font) {
         messageWindow.setFont(font);
-    }
-
-    public TalkState setController(Controller controller) {
-        this.controller = controller;
-        return this;
     }
 
 }
