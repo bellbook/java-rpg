@@ -19,9 +19,7 @@ public class MoveState implements GameState {
     private static final float FRAME_TIME = 0.5f;
 
     private static final MoveState instance = new MoveState();
-
     private boolean debug;
-
     private Player player;
     private Map map;
 
@@ -37,14 +35,10 @@ public class MoveState implements GameState {
         if (c == null || player == null)
             return;
 
-        if (c.isPressing()) {
-            if (c.isTyped(Key.OK))
-                player.check(map);
-            else
-                move(c, player, map);
-        } else {
-            player.idle();
-        }
+        if (c.isTyped(Key.OK))
+            player.check(map);
+        else
+            move(c, player, map);
     }
 
     @Override
@@ -71,7 +65,6 @@ public class MoveState implements GameState {
                 }
             }
         }
-
     }
 
     @Override
@@ -85,13 +78,13 @@ public class MoveState implements GameState {
     }
 
     private void move(Controller c, Player player, Map map) {
-        if (c.isPressing(Key.UP) && c.isPressing(Key.LEFT))
+        if (c.isPressing(Key.UP, Key.LEFT))
             player.move(map, Direction.UPPER_LEFT);
-        else if (c.isPressing(Key.UP) && c.isPressing(Key.RIGHT))
+        else if (c.isPressing(Key.UP, Key.RIGHT))
             player.move(map, Direction.UPPER_RIGHT);
-        else if (c.isPressing(Key.DOWN) && c.isPressing(Key.LEFT))
+        else if (c.isPressing(Key.DOWN, Key.LEFT))
             player.move(map, Direction.LOWER_LEFT);
-        else if (c.isPressing(Key.DOWN) && c.isPressing(Key.RIGHT))
+        else if (c.isPressing(Key.DOWN, Key.RIGHT))
             player.move(map, Direction.LOWER_RIGHT);
         else if (c.isPressing(Key.UP))
             player.move(map, Direction.UP);

@@ -15,7 +15,7 @@ public class Player extends Characters {
 
     public void check(Map map) {
         int dx, dy;
-        final int h = (int) collisionArea.getHeight();
+        int h = (int) collisionArea.getHeight();
 
         switch (direction) {
         case UP:
@@ -23,25 +23,21 @@ public class Player extends Characters {
             collisionArea.setLocation(x, dy - h);
             map.checkEvent(collisionArea, direction);
             break;
-
         case DOWN:
             dy = y + SPEED;
             collisionArea.setLocation(x, dy - h);
             map.checkEvent(collisionArea, direction);
             break;
-
         case LEFT:
             dx = x - SPEED;
             collisionArea.setLocation(dx, y - h);
             map.checkEvent(collisionArea, direction);
             break;
-
         case RIGHT:
             dx = x + SPEED;
             collisionArea.setLocation(dx, y - h);
             map.checkEvent(collisionArea, direction);
             break;
-
         default:
             break;
         }
@@ -54,7 +50,7 @@ public class Player extends Characters {
         super.go(map, direction);
 
         int dx, dy;
-        final int h = (int) collisionArea.getHeight();
+        int h = (int) collisionArea.getHeight();
 
         switch (direction) {
         case UPPER_LEFT:
@@ -66,7 +62,6 @@ public class Player extends Characters {
                 y = dy;
             }
             break;
-
         case UPPER_RIGHT:
             dx = x + SPEED;
             dy = y - SPEED;
@@ -76,7 +71,6 @@ public class Player extends Characters {
                 y = dy;
             }
             break;
-
         case LOWER_LEFT:
             dx = x - SPEED;
             dy = y + SPEED;
@@ -86,7 +80,6 @@ public class Player extends Characters {
                 y = dy;
             }
             break;
-
         case LOWER_RIGHT:
             dx = x + SPEED;
             dy = y + SPEED;
@@ -96,7 +89,6 @@ public class Player extends Characters {
                 y = dy;
             }
             break;
-
         default:
             break;
         }

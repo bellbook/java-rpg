@@ -14,7 +14,6 @@ public class Characters extends Event {
 
     // constant
     protected static final int SPEED = 4;
-
     private static final int   ANIMATION_PATTERN = 2;
     private static final float FRAME_RATE = 8.0f;
     private static final float FRAME_TIME = 1 / FRAME_RATE;
@@ -58,7 +57,7 @@ public class Characters extends Event {
         this.direction = direction;
 
         int dx, dy;
-        final int h = (int) collisionArea.getHeight();
+        int h = (int) collisionArea.getHeight();
 
         switch (direction) {
         case UP:
@@ -67,28 +66,24 @@ public class Characters extends Event {
             if (!map.isHit(collisionArea))
                 y = dy;
             break;
-
         case DOWN:
             dy = y + SPEED;
             collisionArea.setLocation(x, dy - h);
             if (!map.isHit(collisionArea))
                 y = dy;
             break;
-
         case LEFT:
             dx = x - SPEED;
             collisionArea.setLocation(dx, y - h);
             if (!map.isHit(collisionArea))
                 x = dx;
             break;
-
         case RIGHT:
             dx = x + SPEED;
             collisionArea.setLocation(dx, y - h);
             if (!map.isHit(collisionArea))
                 x = dx;
             break;
-
         default:
             break;
         }

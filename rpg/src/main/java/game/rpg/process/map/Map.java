@@ -85,7 +85,6 @@ public class Map {
 
     private void drawEvent(Graphics g, ImageObserver o) {
         Collections.sort(events, eventComparator);
-
         for (Event event : events)
             event.setMapY(convertEventCoordToMap(event.getY()));
 
@@ -111,7 +110,6 @@ public class Map {
         public int compare(Event e1, Event e2) {
             int y1 = e1.getY();
             int y2 = e2.getY();
-
             if (y1 > y2)
                 return 1;
             else if (y1 == y2)
@@ -147,17 +145,14 @@ public class Map {
         int mapMinY = (int) (rect.getMinY() / tileSize);
         int mapMaxX = (int) (rect.getMaxX() / tileSize);
         int mapMaxY = (int) (rect.getMaxY() / tileSize);
-
         for (int y = mapMinY; y <= mapMaxY; y++) {
             for (int x = mapMinX; x <= mapMaxX; x++) {
                 if (x >= width || y >= height)
                     continue;
-
                 if (collision[y][x] != 0 ) {
                     int worldX = x * tileSize;
                     int worldY = y * tileSize;
                     int hitY = (int) (worldY + (1 - COLLISION_RATE) * tileSize);
-
                     collisionArea.setLocation(worldX, hitY);
                     if (collisionArea.intersects(rect))
                         return true;
@@ -186,22 +181,18 @@ public class Map {
 
         if (event instanceof Characters) {
             switch (direction) {
-            case UP :
+            case UP:
                 ((Characters) event).setDirection(Direction.DOWN);
                 break;
-
-            case DOWN :
+            case DOWN:
                 ((Characters) event).setDirection(Direction.UP);
                 break;
-
-            case LEFT :
+            case LEFT:
                 ((Characters) event).setDirection(Direction.RIGHT);
                 break;
-
-            case RIGHT :
+            case RIGHT:
                 ((Characters) event).setDirection(Direction.LEFT);
                 break;
-
             default:
                 break;
             }

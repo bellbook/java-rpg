@@ -3,7 +3,7 @@ package game.rpg.process.event;
 import java.awt.Font;
 
 import game.core.GameState;
-import game.rpg.Rpg;
+import game.rpg.RPG;
 import game.rpg.process.map.Map;
 import game.rpg.state.MoveState;
 import game.rpg.state.TalkState;
@@ -12,7 +12,7 @@ public class EventCommand {
 
     public static void showText(String text) {
         TalkState state = TalkState.getInstance();
-        Rpg.getInstance().setState(state);
+        RPG.getInstance().setState(state);
         state.showMessage(text);
     }
 
@@ -26,7 +26,7 @@ public class EventCommand {
     }
 
     public static void setState(GameState state) {
-        Rpg.getInstance().setState(state);
+        RPG.getInstance().setState(state);
     }
 
     public static Map getMap() {

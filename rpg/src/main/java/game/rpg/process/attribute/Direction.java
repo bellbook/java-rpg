@@ -1,7 +1,6 @@
 package game.rpg.process.attribute;
 
 public enum Direction {
-
     DOWN  (0),
     UP    (1),
     LEFT  (2),

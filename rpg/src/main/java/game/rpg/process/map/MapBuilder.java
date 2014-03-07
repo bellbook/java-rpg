@@ -24,7 +24,6 @@ import util.CSV;
 public class MapBuilder {
 
     private static final MapBuilder instance = new MapBuilder();
-
     private final Digester digester;
 
     private MapBuilder() {

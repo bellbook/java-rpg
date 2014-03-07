@@ -1,9 +1,9 @@
-import game.rpg.Rpg;
+import game.rpg.RPG;
 
 public class Main {
 
     public static void main(String[] args) {
-        Rpg rpg = Rpg.getInstance();
+        RPG rpg = RPG.getInstance();
         rpg.start();
         rpg.show();
     }

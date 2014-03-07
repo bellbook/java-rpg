@@ -21,10 +21,8 @@ public class SystemWindow {
         this.outerY = y;
         this.outerWidth = width;
         this.outerHeight = height;
-
         innerX = x + EDGE;
         innerY = y + EDGE;
-
         innerWidth  = width  - EDGE * 2;
         innerHeight = height - EDGE * 2;
     }
@@ -32,13 +30,10 @@ public class SystemWindow {
     public void draw(Graphics g) {
         g.setColor(Color.WHITE);
         g.fillRoundRect(outerX, outerY, outerWidth, outerHeight, ARC_WIDTH, ARC_HEIGHT);
-
         g.setColor(Color.BLACK);
         g.fillRoundRect(innerX, innerY, innerWidth, innerHeight, INNER_ARC_WIDTH, INNER_ARC_HEIGHT);
-
         g.setColor(Color.BLACK);
         g.drawRoundRect(outerX, outerY, outerWidth, outerHeight, ARC_WIDTH, ARC_HEIGHT);
-
         g.setColor(Color.LIGHT_GRAY);
         g.drawRoundRect(innerX, innerY, innerWidth, innerHeight, INNER_ARC_WIDTH, INNER_ARC_HEIGHT);
     }

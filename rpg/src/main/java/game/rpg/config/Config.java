@@ -49,7 +49,6 @@ public class Config {
     }
 
     private static final Log log = LogFactory.getLog(Config.class);
-
     private static final String FILE_NAME = "config.properties";
     private static final Properties prop = new Properties();
 

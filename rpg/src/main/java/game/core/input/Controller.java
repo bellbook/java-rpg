@@ -36,15 +36,12 @@ public class Controller implements KeyListener {
         return pressingKey.contains(key);
     }
 
-    public boolean isPressing(Key[] keys) {
-        for (Key key : keys)
-            if (isPressing(key))
-                return true;
-        return false;
+    public boolean isPressing(Key key1, Key key2) {
+        return isPressing(key1) && isPressing(key2);
     }
 
     public boolean isTyped(Key key) {
-        if (key == typedKey) {
+        if (typedKey == key) {
             typedKey = null;
             return true;
         }
@@ -57,7 +54,7 @@ public class Controller implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        final int keyCode = e.getKeyCode();
+        int keyCode = e.getKeyCode();
         if (keyCode == keyUp) {
             pressingKey.add(Key.UP);
         } else if (keyCode == keyDown) {
@@ -81,8 +78,7 @@ public class Controller implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         typedKey = Key.NONE;
-
-        final int keyCode = e.getKeyCode();
+        int keyCode = e.getKeyCode();
         if (keyCode == keyUp)
             pressingKey.remove(Key.UP);
         else if (keyCode == keyDown)

@@ -3,7 +3,7 @@ package game.rpg.state;
 import game.core.GameState;
 import game.core.input.Controller;
 import game.core.input.Controller.Key;
-import game.rpg.Rpg;
+import game.rpg.RPG;
 import game.rpg.config.ConfigConst;
 import game.rpg.process.window.MessageWindow;
 
@@ -34,7 +34,7 @@ public class TalkState implements GameState {
         if (c.isTyped(Key.OK)) {
             boolean hasNextPage = messageWindow.nextPage();
             if (!hasNextPage)
-                Rpg.getInstance().setState(MoveState.getInstance());
+                RPG.getInstance().setState(MoveState.getInstance());
         }
     }
 

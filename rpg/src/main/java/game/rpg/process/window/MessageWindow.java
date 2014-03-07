@@ -15,25 +15,19 @@ import org.apache.log4j.helpers.Loader;
 public class MessageWindow extends SystemWindow {
 
     private static final int LINE_SPACE = 16;
-
     private static final int MAX_CHARS_PER_LINE = 15;
     private static final int MAX_LINES_PER_PAGE = 3;
     private static final int MAX_CHARS_PER_PAGE = MAX_CHARS_PER_LINE * MAX_LINES_PER_PAGE;
-
     private static final long DELAY  = 0;
     private static final long PERIOD = 50;
 
     private boolean isVisible;
-
     private char[] text;
     private int position; // the position of total characters
     private int currentPage;
     private boolean isDrawingMessage;
-
     private final int x, y; // top left point
-
     private DrawMessageTask task;
-
     private Image cursor;
     private Font font;
 
@@ -79,13 +73,11 @@ public class MessageWindow extends SystemWindow {
         int textY;
         for (int i = currentPage * MAX_CHARS_PER_PAGE; i <= position; i++) {
             char c = text[i];
-
             if (getCharPositionInLine(i) == 0)
                 textX = x;
             else
                 textX += g.getFontMetrics().charWidth(c);
             textY = y + LINE_SPACE * getLinePositionInPage(i);
-
             g.drawString(String.valueOf(c), textX, textY);
         }
 
@@ -101,10 +93,8 @@ public class MessageWindow extends SystemWindow {
         if (!hasNextChar(position)) {
             task.cancel();
             task = null;
-
             position = 0;
             currentPage = 0;
-
             hide();
             return false;
         }
@@ -131,6 +121,7 @@ public class MessageWindow extends SystemWindow {
                     isDrawingMessage = false;
             }
         }
+
     }
 
     private int getLinePosition(int position) {
@@ -167,7 +158,6 @@ public class MessageWindow extends SystemWindow {
 
     private char[] parse(String str) {
         int count = 0;
-
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
             if (c == '\n')
@@ -179,7 +169,6 @@ public class MessageWindow extends SystemWindow {
         }
 
         char[] text = new char[count];
-
         // initialize
         for (int i = 0; i < text.length; i++)
             text[i] = '　';
@@ -194,7 +183,6 @@ public class MessageWindow extends SystemWindow {
             else
                 text[position++] = c;
         }
-
         return text;
     }
 

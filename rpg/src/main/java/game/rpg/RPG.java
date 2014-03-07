@@ -15,16 +15,16 @@ import org.apache.log4j.Logger;
 import util.Loader;
 import util.Python;
 
-public class Rpg {
+public class RPG {
 
-    private static final Logger log = Logger.getLogger(Rpg.class);
+    private static final Logger log = Logger.getLogger(RPG.class);
     private static final String SCRIPT_FILE_NAME = "init/init.py";
-    private static final Rpg instance = new Rpg();
+    private static final RPG instance = new RPG();
 
     private final Game game;
     private final GameFrame frame;
 
-    private Rpg() {
+    private RPG() {
         // validate
         try {
             ConfigConst.validate();
@@ -70,7 +70,7 @@ public class Rpg {
                 .setState(state);
     }
 
-    public static Rpg getInstance() {
+    public static RPG getInstance() {
         return instance;
     }
 
