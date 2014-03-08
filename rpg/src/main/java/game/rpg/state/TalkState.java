@@ -31,10 +31,11 @@ public class TalkState implements GameState {
         if (c == null)
             return;
 
-        if (c.isTyped(Key.OK)) {
+        if (c.isPressing(Key.OK)) {
             boolean hasNextPage = messageWindow.nextPage();
             if (!hasNextPage)
                 RPG.getInstance().setState(MoveState.getInstance());
+            c.clear(Key.OK);
         }
     }
 

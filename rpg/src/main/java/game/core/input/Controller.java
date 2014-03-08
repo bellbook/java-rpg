@@ -19,7 +19,6 @@ public class Controller implements KeyListener {
     }
 
     private final EnumSet<Key> pressingKey = EnumSet.noneOf(Key.class);
-    private Key typedKey;
 
     private int keyUp     = 38; // ↑
     private int keyDown   = 40; // ↓
@@ -40,12 +39,8 @@ public class Controller implements KeyListener {
         return isPressing(key1) && isPressing(key2);
     }
 
-    public boolean isTyped(Key key) {
-        if (typedKey == key) {
-            typedKey = null;
-            return true;
-        }
-        return false;
+    public boolean clear(Key key) {
+        return pressingKey.remove(key);
     }
 
     @Override
@@ -55,29 +50,24 @@ public class Controller implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-        if (keyCode == keyUp) {
+        if (keyCode == keyUp)
             pressingKey.add(Key.UP);
-        } else if (keyCode == keyDown) {
+        else if (keyCode == keyDown)
             pressingKey.add(Key.DOWN);
-        } else if (keyCode == keyLeft) {
+        else if (keyCode == keyLeft)
             pressingKey.add(Key.LEFT);
-        } else if (keyCode == keyRight) {
+        else if (keyCode == keyRight)
             pressingKey.add(Key.RIGHT);
-        } else if (keyCode == keyOK) {
+        else if (keyCode == keyOK)
             pressingKey.add(Key.OK);
-            if (typedKey == Key.NONE)
-                typedKey = Key.OK;
-        } else if (keyCode == keyCancel) {
+        else if (keyCode == keyCancel)
             pressingKey.add(Key.CANCEL);
-            if (typedKey == Key.NONE)
-                typedKey = Key.CANCEL;
-        } else {
-        }
+        else
+            ;
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        typedKey = Key.NONE;
         int keyCode = e.getKeyCode();
         if (keyCode == keyUp)
             pressingKey.remove(Key.UP);

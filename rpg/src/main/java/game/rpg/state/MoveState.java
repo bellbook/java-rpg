@@ -35,10 +35,12 @@ public class MoveState implements GameState {
         if (c == null || player == null)
             return;
 
-        if (c.isTyped(Key.OK))
+        if (c.isPressing(Key.OK)) {
             player.check(map);
-        else
+            c.clear(Key.OK);
+        } else {
             move(c, player, map);
+        }
     }
 
     @Override
