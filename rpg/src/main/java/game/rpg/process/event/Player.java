@@ -46,7 +46,7 @@ public class Player extends Characters {
     }
 
     @Override
-    public void go(Map map,Direction direction) {
+    protected void go(Map map, Direction direction) {
         super.go(map, direction);
 
         int dx, dy;

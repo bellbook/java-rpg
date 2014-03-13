@@ -14,19 +14,18 @@ public class Characters extends Event {
 
     // constant
     protected static final int SPEED = 4;
-    private static final int   ANIMATION_PATTERN = 2;
-    private static final float FRAME_RATE = 8.0f;
-    private static final float FRAME_TIME = 1 / FRAME_RATE;
+    private static final int ANIMATION_PATTERN = 2;
+    private static final int FRAME_RATE = 8;
+    private static final int FRAME_TIME = 1000 / FRAME_RATE; // [ms]
     private static final float COLLISION_RATE = 0.5f; // chip の 下から 1/2 の領域を当たり判定にする
 
     // animation
     protected int animation = 0;
-    protected float waitTime;
-    protected long currentTime, pastTime;
+    private long waitingTime, pastTime;
 
     // parameter
     protected Direction direction = Direction.DOWN;
-    protected Action action = Action.STAND;;
+    protected Action action = Action.STAND;
 
     public Characters(String chipFileName) {
         this.graphic = new ImageIcon(chipFileName).getImage();
@@ -36,24 +35,17 @@ public class Characters extends Event {
     }
 
     public void move(Map map, Direction direction) {
-        // control animation for frame-rate
-        currentTime = System.currentTimeMillis();
-        float time = (currentTime - pastTime) * 0.001f;
-        pastTime = currentTime;
-
-        waitTime += time;
-        if (waitTime < FRAME_TIME)
-            return;
-        waitTime = 0.0f;
-
-        // go
-        go(map, direction);
-
-        // decide motion
-        animation = (animation + 1) % ANIMATION_PATTERN;
+        if (canAct(FRAME_TIME)) {
+            switchAnimation();
+            go(map, direction);
+        }
     }
 
-    public void go(Map map, Direction direction) {
+    public void moveRandomly(Map map) {
+        move(map, Direction.toDirection(new Random().nextInt(4)));
+    }
+
+    protected void go(Map map, Direction direction) {
         this.direction = direction;
 
         int dx, dy;
@@ -91,22 +83,24 @@ public class Characters extends Event {
         collisionArea.setLocation(x, y - h);
     }
 
-    public void moveRandomly(Map map) {
-        move(map, Direction.toDirection(new Random().nextInt(4)));
+    public void step(int time) {
+        if (canAct(time))
+            switchAnimation();
     }
 
-    public void marchInPlace(Map map, float frameTime) {
-        // control animation for frame-rate
-        currentTime = System.currentTimeMillis();
-        float time = (currentTime - pastTime) * 0.001f;
+    private boolean canAct(int time) {
+        long currentTime = System.currentTimeMillis();
+        waitingTime += currentTime - pastTime;
         pastTime = currentTime;
+        if (waitingTime < time) {
+            return false;
+        } else {
+            waitingTime = 0;
+            return true;
+        }
+    }
 
-        waitTime += time;
-        if (waitTime < frameTime)
-            return;
-        waitTime = 0.0f;
-
-        // decide motion
+    private void switchAnimation() {
         animation = (animation + 1) % ANIMATION_PATTERN;
     }
 

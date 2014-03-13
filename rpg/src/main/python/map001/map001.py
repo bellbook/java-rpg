@@ -53,7 +53,7 @@ if __name__ == '__main__':
     characters.setName("man002")
     characters.setScript(event_file)
     characters.setDirection(Direction.RIGHT)
-    characters.setAction(Action.WAIT)
+    characters.setAction(Action.STEP)
     map.addEvent(characters)
 
     # character005
@@ -62,7 +62,7 @@ if __name__ == '__main__':
     characters = Characters(chip_file).setLocation(256, 112)
     characters.setName("venus")
     characters.setScript(event_file)
-    characters.setAction(Action.WAIT)
+    characters.setAction(Action.STEP)
     map.addEvent(characters)
 
     # character006
@@ -78,7 +78,7 @@ if __name__ == '__main__':
     event_file = Loader.getResourceAsString("map001/event008.py")
     characters = Characters(chip_file).setLocation(76, 136)
     characters.setScript(event_file)
-    characters.setAction(Action.WAIT)
+    characters.setAction(Action.STEP)
     map.addEvent(characters)
 
     # character008
@@ -87,7 +87,7 @@ if __name__ == '__main__':
     characters = Characters(chip_file).setLocation(40, 220)
     characters.setScript(event_file)
     characters.setDirection(Direction.UP)
-    characters.setAction(Action.WAIT)
+    characters.setAction(Action.STEP)
     map.addEvent(characters)
 
     # map

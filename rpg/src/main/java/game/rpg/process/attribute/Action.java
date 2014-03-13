@@ -2,6 +2,6 @@ package game.rpg.process.attribute;
 
 public enum Action {
     STAND,
-    WAIT,
+    STEP,
     MOVE_RANDOMLY
 }

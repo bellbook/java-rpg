@@ -16,7 +16,7 @@ import java.util.Random;
 public class MoveState implements GameState {
 
     private static final float MOVEMENT_PROBABILITY = 0.02f;
-    private static final float FRAME_TIME = 0.5f;
+    private static final int FRAME_TIME = 500;
 
     private static final MoveState instance = new MoveState();
     private boolean debug;
@@ -39,7 +39,7 @@ public class MoveState implements GameState {
             player.check(map);
             c.clear(Key.OK);
         } else {
-            move(c, player, map);
+            movePlayer(c, player, map);
         }
     }
 
@@ -48,25 +48,7 @@ public class MoveState implements GameState {
         if (map == null)
             return;
 
-        // キャラクターを自動的に動かす
-        for (Event event : map.getEvents()) {
-            if (event instanceof Characters) {
-                Characters character = (Characters) event;
-                switch (character.getAction()) {
-                case STAND:
-                    break;
-                case WAIT:
-                    character.marchInPlace(map, FRAME_TIME);
-                    break;
-                case MOVE_RANDOMLY:
-                    if (new Random().nextFloat() < MOVEMENT_PROBABILITY)
-                        character.moveRandomly(map);
-                    break;
-                default:
-                    break;
-                }
-            }
-        }
+        moveCharacters();
     }
 
     @Override
@@ -79,7 +61,7 @@ public class MoveState implements GameState {
             drawDebugInfo(g);
     }
 
-    private void move(Controller c, Player player, Map map) {
+    private void movePlayer(Controller c, Player player, Map map) {
         if (c.isPressing(Key.UP, Key.LEFT))
             player.move(map, Direction.UPPER_LEFT);
         else if (c.isPressing(Key.UP, Key.RIGHT))
@@ -98,6 +80,27 @@ public class MoveState implements GameState {
             player.move(map, Direction.RIGHT);
         else
             player.idle();
+    }
+
+    private void moveCharacters() {
+        for (Event event : map.getEvents()) {
+            if (event instanceof Characters) {
+                Characters character = (Characters) event;
+                switch (character.getAction()) {
+                case STAND:
+                    break;
+                case STEP:
+                    character.step(FRAME_TIME);
+                    break;
+                case MOVE_RANDOMLY:
+                    if (new Random().nextFloat() < MOVEMENT_PROBABILITY)
+                        character.moveRandomly(map);
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
     }
 
     private void drawDebugInfo(Graphics g) {
