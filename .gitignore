@@ -1,9 +1,16 @@
 .DS_Store
 
-bin/
-build/
-.gradle
+# Java
+*.class
 
+# Eclipse
+bin/
+
+# Gradle
+.gradle
+build/
+
+# project
 log/
 *.png
 *.gif
