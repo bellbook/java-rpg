@@ -1,8 +1,7 @@
 package game.rpg.process.map;
 
+@SuppressWarnings("serial")
 public class MapParseException extends Exception {
-
-    private static final long serialVersionUID = 8014831423501539905L;
 
     public MapParseException() {
         super();

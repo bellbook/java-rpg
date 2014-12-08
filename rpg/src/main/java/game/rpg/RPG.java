@@ -7,13 +7,12 @@ import game.core.output.GameFrame;
 import game.core.output.GameScreen;
 import game.rpg.config.ConfigConst;
 import game.rpg.state.MoveState;
+import game.rpg.util.Loader;
+import game.rpg.util.Python;
 
 import java.io.FileNotFoundException;
 
 import org.apache.log4j.Logger;
-
-import util.Loader;
-import util.Python;
 
 public class RPG {
 

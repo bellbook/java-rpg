@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from util import *
 from game.rpg.config import *
 from game.rpg.process.event import *
+from game.rpg.util import *
 
 
 if __name__ == '__main__':

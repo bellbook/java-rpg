@@ -1,5 +1,7 @@
 package game.rpg.config;
 
+import game.rpg.util.Loader;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,8 +10,6 @@ import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import util.Loader;
 
 public class Config {
 
@@ -36,7 +36,7 @@ public class Config {
         DEBUG ("false"),
         ;
 
-        private String defaultValue;
+        private final String defaultValue;
 
         private Key(String defaultValue) {
             this.defaultValue = defaultValue;

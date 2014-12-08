@@ -5,6 +5,7 @@ import game.rpg.process.map.bean.ImageBean;
 import game.rpg.process.map.bean.LayerBean;
 import game.rpg.process.map.bean.MapBean;
 import game.rpg.process.map.bean.TilesetBean;
+import game.rpg.util.CSV;
 
 import java.awt.Image;
 import java.io.File;
@@ -19,15 +20,11 @@ import javax.swing.ImageIcon;
 import org.apache.commons.digester3.Digester;
 import org.xml.sax.SAXException;
 
-import util.CSV;
+public class MapLoader {
 
-public class MapBuilder {
+    private static final Digester digester = new Digester();
 
-    private static final MapBuilder instance = new MapBuilder();
-    private final Digester digester;
-
-    private MapBuilder() {
-        digester = new Digester();
+    static {
         digester.addObjectCreate("map", MapBean.class);
         digester.addSetProperties("map");
 
@@ -49,11 +46,7 @@ public class MapBuilder {
         digester.addBeanPropertySetter("map/layer/data");
     }
 
-    public static MapBuilder getInstance() {
-        return instance;
-    }
-
-    public Map parse(String mapFileName) throws IOException, MapParseException {
+    public static Map load(String mapFileName) throws IOException, MapParseException {
         File file = new File(mapFileName);
 
         MapBean mapBean;
@@ -91,10 +84,9 @@ public class MapBuilder {
         int[][] foreground   = parseLayer(layerList.get(2).getData().getData(), width, height);
         int[][] collision    = parseLayer(layerList.get(3).getData().getData(), width, height);
 
-        return new Map()
+        return new Map(tileSize)
                 .setWidth(width)
                 .setHeight(height)
-                .setTileSize(tileSize)
                 .setTileSet(tileSet)
                 .setTileSetColumn(tileSetColumn)
                 .setBackground(background)
@@ -103,7 +95,7 @@ public class MapBuilder {
                 .setCollision(collision);
     }
 
-    private int[][] parseLayer(String data, int width, int height) throws IOException {
+    private static int[][] parseLayer(String data, int width, int height) throws IOException {
         Reader r = new StringReader(data);
         List<String[]> table = CSV.read(r);
 

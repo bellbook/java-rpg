@@ -1,4 +1,4 @@
-package util;
+package game.rpg.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

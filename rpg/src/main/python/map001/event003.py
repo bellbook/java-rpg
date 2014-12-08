@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from java.awt import Font
-from util import *
 from game.rpg.process.event import *
+from game.rpg.util import *
 
 
 if __name__ == '__main__':

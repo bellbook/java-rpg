@@ -1,5 +1,7 @@
 package game.rpg.process.event;
 
+import game.rpg.util.Python;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -7,24 +9,22 @@ import java.awt.image.ImageObserver;
 
 import javax.swing.ImageIcon;
 
-import util.Python;
-
 public class Event {
 
-    // constant
+    // Constant
     protected static final int CHIP_SIZE = 16;
 
-    // script for event
+    // Script for event
     private String scriptFileName;
 
-    // parameter
+    // Parameter
     protected String name;
     protected Image graphic;
     protected int x, y; // bottom left point
     protected int width, height;
     protected int mapX, mapY; // map coordinate
 
-    // collision detection
+    // Collision detection
     protected Rectangle collisionArea = new Rectangle(); // world coordinate
 
     public Event() {
@@ -44,7 +44,6 @@ public class Event {
 
         int sx1 = 0;
         int sy1 = 0;
-
         g.drawImage(
                 graphic,
                 x,

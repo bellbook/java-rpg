@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
 from java.lang import *
-from util import *
 from game.rpg.process.attribute import *
 from game.rpg.process.event import *
 from game.rpg.process.map import *
+from game.rpg.util import *
 
 
 if __name__ == '__main__':
     # map
     map_file = Loader.getResourceAsString("map/map001/map001.tmx")
-    map = MapBuilder.getInstance().parse(map_file)
+    map = MapLoader.load(map_file)
 
     # event
     chip_file = Loader.getResourceAsString("event/trash1.png")

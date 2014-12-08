@@ -12,18 +12,18 @@ import javax.swing.ImageIcon;
 
 public class Characters extends Event {
 
-    // constant
+    // Constant
     protected static final int SPEED = 4;
     private static final int ANIMATION_PATTERN = 2;
     private static final int FRAME_RATE = 8;
     private static final int FRAME_TIME = 1000 / FRAME_RATE; // [ms]
     private static final float COLLISION_RATE = 0.5f; // chip の 下から 1/2 の領域を当たり判定にする
 
-    // animation
+    // Animation
     protected int animation = 0;
     private long waitingTime, pastTime;
 
-    // parameter
+    // Parameter
     protected Direction direction = Direction.DOWN;
     protected Action action = Action.STAND;
 
@@ -108,7 +108,6 @@ public class Characters extends Event {
     public void draw(Graphics g, ImageObserver o) {
         int sx1 = CHIP_SIZE * width  * animation;
         int sy1 = CHIP_SIZE * height * direction.getId();
-
         g.drawImage(
                 graphic,
                 x,

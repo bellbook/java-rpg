@@ -14,7 +14,7 @@ public enum Direction {
 
     private static final Direction[] directions = Direction.values();
 
-    private int id;
+    private final int id;
 
     private Direction(int id) {
         this.id = id;

@@ -16,25 +16,26 @@ import java.util.List;
 
 public class Map {
 
-    // constant
+    // Constant
     private static final float COLLISION_RATE = 0.75f; // tile の 下から 3/4 の領域を当たり判定にする
     private static final EventComparator eventComparator = new EventComparator();
 
-    // parameter
+    // Parameter
     private int width, height;
-    private int tileSize = 16;
+    private final int tileSize;
     private Image tileSet;
     private int tileSetColumn;
     private int[][] background, middleground, foreground, collision;
 
-    // collision detection
+    // Collision detection
     private final Rectangle collisionArea = new Rectangle();
 
     // Relationship
     private Player player;
     private final List<Event> events;
 
-    Map() {
+    Map(int tileSize) {
+        this.tileSize = tileSize;
         events = new ArrayList<Event>();
         collisionArea.setSize(tileSize, (int) (tileSize * COLLISION_RATE));
     }
@@ -68,7 +69,6 @@ public class Map {
         int dy1 = y * tileSize;
         int sx1 = val % tileSetColumn * tileSize;
         int sy1 = val / tileSetColumn * tileSize;
-
         g.drawImage(
                 tileSet,
                 dx1,
@@ -175,7 +175,7 @@ public class Map {
     }
 
     public void checkEvent(Rectangle rect, Direction direction) {
-        Event event = existEvent(rect);
+        Event event = existsEvent(rect);
         if (event == null)
             return;
 
@@ -207,7 +207,7 @@ public class Map {
      * @param rect
      * @return
      */
-    private Event existEvent(Rectangle rect) {
+    private Event existsEvent(Rectangle rect) {
         for (Event event : events) {
             // ignore if the same object.
             if (rect == event.getCollisionArea())
@@ -260,11 +260,6 @@ public class Map {
 
     Map setHeight(int height) {
         this.height = height;
-        return this;
-    }
-
-    Map setTileSize(int tileSize) {
-        this.tileSize = tileSize;
         return this;
     }
 

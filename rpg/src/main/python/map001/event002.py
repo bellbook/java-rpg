@@ -4,8 +4,8 @@ from java.lang import *
 from java.awt import Font
 from java.io import File
 from java.util import Calendar
-from util import *
 from game.rpg.process.event import *
+from game.rpg.util import *
 
 
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-package util;
+package game.rpg.util;
 
 import org.python.util.PythonInterpreter;
 
