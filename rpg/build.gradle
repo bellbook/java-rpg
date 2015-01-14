@@ -9,30 +9,31 @@ repositories {
 }
 
 dependencies {
-    compile 'org.python:jython:2.5.3',
-            'org.apache.commons:commons-digester3:3.2',
-            'commons-beanutils:commons-beanutils:1.8.3',
-            'commons-logging:commons-logging:1.1.3',
-            'log4j:log4j:1.2.16'
+    compile 'org.python:jython:2.5.3'
+    compile 'org.apache.commons:commons-digester3:3.2'
+    compile 'commons-beanutils:commons-beanutils:1.8.3'
+    compile 'commons-logging:commons-logging:1.1.3'
 
     compile files('lib/log4j-1.2.13-ext.jar')
 }
 
+sourceSets.main.java {
+    srcDir 'src/main/python'
+}
+
 jar {
     archiveName = "${baseName}.${extension}"
-
-    def libPath = configurations.compile.collect { 'lib/' + it.getName() }.join(' ')
     manifest {
+        def libPath = configurations.compile.collect { "lib/${it.name}" }.join(' ')
         attributes 'Implementation-Version': version
         attributes 'Main-Class': 'Main'
         attributes 'Class-Path': 'resources/ script/ ' + libPath
     }
-
     sourceSets.main.resources.exclude '*'
 }
 
 task release(dependsOn: assemble) << {
-    copy { // oss
+    copy { // lib
         from configurations.compile
         into "$distsDir/lib"
     }

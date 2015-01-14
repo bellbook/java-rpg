@@ -2,7 +2,7 @@
 
 <project name="project" default="jar" basedir=".">
 
-	<!-- jar name -->
+    <!-- jar name -->
     <property name="jar.name" value="rpg.jar" />
 
     <property name="base.dir" location="." />
@@ -13,7 +13,7 @@
     <property name="classes.dir" location="build/classes/main" />
     <property name="mainclass" value="Main" />
 
-	<path id="classpath">
+    <path id="classpath">
         <fileset dir="${lib.dir}" includes="*.jar" />
     </path>
     <property name="classpath.resource" value="resources/ script/" />
