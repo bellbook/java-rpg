@@ -12,7 +12,7 @@ public class Game {
     private static final long PERIOD = 50;
 
     private final Timer timer;
-    private final GameLoop loop;
+    private final GameLoop gameLoop;
 
     private GameState state = new NullState();
     private final Controller controller;
@@ -23,11 +23,11 @@ public class Game {
         this.screen = screen;
         this.screen.addKeyListener(controller);
         timer = new Timer();
-        loop = new GameLoop();
+        gameLoop = new GameLoop();
     }
 
     public void start() {
-        timer.schedule(loop, DELAY, PERIOD);
+        timer.schedule(gameLoop, DELAY, PERIOD);
     }
 
     public void stop() {

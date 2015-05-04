@@ -16,8 +16,8 @@ public class CSV {
 
         List<String[]> table = new ArrayList<String[]>();
         BufferedReader br = new BufferedReader(r);
-        String line;
         try {
+            String line;
             while ((line = br.readLine()) != null) {
                 table.add(line.split(","));
             }

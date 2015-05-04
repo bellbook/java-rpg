@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
 public class RPG {
 
     private static final Logger log = Logger.getLogger(RPG.class);
-    private static final String SCRIPT_FILE_NAME = "init/init.py";
+    private static final String SCRIPT_FILE = "init/init.py";
     private static final RPG instance = new RPG();
 
     private final Game game;
@@ -27,24 +27,24 @@ public class RPG {
         // validate
         try {
             ConfigConst.validate();
-        } catch (Throwable e) {
-            log.debug("validate error", e);
+        } catch (Exception e) {
+            log.error("validate error", e);
             throw new RuntimeException(e);
         }
 
         // configure process
         String scriptFileName;
         try {
-            scriptFileName = Loader.getResourceAsString(SCRIPT_FILE_NAME);
+            scriptFileName = Loader.getResourceAsString(SCRIPT_FILE);
         } catch (FileNotFoundException e) {
-            log.debug(SCRIPT_FILE_NAME, e);
+            log.error(SCRIPT_FILE, e);
             throw new RuntimeException(e);
         }
         try {
             Python.execfile(scriptFileName);
         } catch (Exception e) {
             log.error("Failed to execute the file by Jython: " + scriptFileName, e);
-            System.exit(-1);
+            System.exit(1);
         }
 
         // configure input

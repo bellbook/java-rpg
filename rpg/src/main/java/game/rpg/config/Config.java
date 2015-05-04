@@ -36,27 +36,33 @@ public class Config {
         DEBUG ("false"),
         ;
 
+        private final String name;
         private final String defaultValue;
 
         private Key(String defaultValue) {
+            name = name().toLowerCase().replaceAll("_", ".");
             this.defaultValue = defaultValue;
+        }
+
+        @Override
+        public String toString() {
+            return name;
         }
 
         public String getDefaultValue() {
             return defaultValue;
         }
-
     }
 
     private static final Log log = LogFactory.getLog(Config.class);
-    private static final String FILE_NAME = "config.properties";
-    private static final Properties prop = new Properties();
+    private static final String CONFIG_FILE = "config.properties";
+    private static final Properties props = new Properties();
 
     static {
         try {
-            loadProperties(FILE_NAME);
+            load(CONFIG_FILE);
         } catch (IOException e) {
-            log.debug("", e);
+            log.warn("", e);
         }
     }
 
@@ -64,13 +70,13 @@ public class Config {
     }
 
     public static String get(Key key) {
-        return prop.getProperty(key.name(), key.getDefaultValue());
+        return props.getProperty(key.toString(), key.getDefaultValue());
     }
 
-    private static void loadProperties(String filename) throws IOException {
+    private static void load(String filename) throws IOException {
         File file = Loader.getResourceAsFile(filename);
         InputStream in = new FileInputStream(file);
-        prop.load(in);
+        props.load(in);
     }
 
 }
